@@ -1,0 +1,30 @@
+{
+  "name": "todo_list",
+  "version": "1.0.0",
+  "description": "A Todo List Site, as part of The Odin Project curriculum",
+  "keywords": [
+    "TOP",
+    "Todo",
+    "Webpack",
+    "Webdev"
+  ],
+  "license": "MIT",
+  "author": "Alex Rosegrid",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "serve": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.4",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.7",
+    "jest": "^30.4.2",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.3",
+    "webpack-dev-server": "^5.2.4",
+    "webpack-merge": "^6.0.1"
+  }
+}
