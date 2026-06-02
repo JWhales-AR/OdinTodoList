@@ -1,3 +1,10 @@
+import todaySvg from './assets/today.svg';
+import calendarAllSvg from './assets/calendar_all.svg';
+import incompleteSvg from './assets/incomplete.svg';
+import folderSvg from './assets/folder.svg';
+import deleteSvg from './assets/delete.svg';
+import editSvg from './assets/edit.svg';
+
 let mainElement = function () {
 
     let taskListHeader = function () {
@@ -17,15 +24,38 @@ let mainElement = function () {
         let tasksList = function () {
 
             function newTaskItem(text) {
+                let deleteButton = document.createElement("button");
+                deleteButton.classList.add("task-delete-button");
+                deleteButton.innerHTML = deleteSvg;
+
+                let editButton = document.createElement("button");
+                editButton.classList.add("task-edit-button");
+                editButton.innerHTML = editSvg;
+
+                let buttonsContainer = document.createElement("div");
+                buttonsContainer.classList.add("task-button-container");
+                buttonsContainer.appendChild(deleteButton);
+                buttonsContainer.appendChild(editButton);
+
+                let checkbox = document.createElement("input");
+                checkbox.classList.add("task-checkbox");
+                checkbox.type = "checkbox";
+
+                let checkboxTaskWrapper = document.createElement("div");
+                checkboxTaskWrapper.appendChild(checkbox);
+                checkboxTaskWrapper.innerHTML += ` <span>${text}</span>`;
+
                 let element = document.createElement("li");
-                element.textContent = text;
+                element.classList.add("task-item");
+                element.appendChild(checkboxTaskWrapper);
+                element.appendChild(buttonsContainer);
                 return element;
             }
 
             let element = document.createElement("ul");
-            element.appendChild(newTaskItem("Dummy Task 1"));
-            element.appendChild(newTaskItem("Dummy Task 2"));
-            element.appendChild(newTaskItem("Dummy Task 3"));
+            element.appendChild(newTaskItem("Dummy Task 1 | Due 10-05-2026 | Medium"));
+            element.appendChild(newTaskItem("Dummy Task 2 | Due 10-04-2026 | Low"));
+            element.appendChild(newTaskItem("Dummy Task 3 | Due 01-05-2026  | Medium"));
 
             return element;
         }();
@@ -71,16 +101,17 @@ let sideBar = function () {
 
         let optionsList = function () {
 
-            function newListElement(text) {
+            function newGlobalOption(text) {
                 let element = document.createElement("li");
-                element.textContent = text;
+                element.classList.add("task-global-option");
+                element.innerHTML = `<span>${text}</span>`;
                 return element;
             }
 
             let element = document.createElement("ul");
-            element.appendChild(newListElement("All Tasks"));
-            element.appendChild(newListElement("Due Today"));
-            element.appendChild(newListElement("Incomplete Tasks"));
+            element.appendChild(newGlobalOption(`${calendarAllSvg} All Tasks`));
+            element.appendChild(newGlobalOption(`${todaySvg} Due Today`));
+            element.appendChild(newGlobalOption(`${incompleteSvg} Incomplete Tasks`));
 
             return element;
         }();
@@ -122,16 +153,34 @@ let sideBar = function () {
 
         let projectsList = function () {
 
-            function newListElement(text) {
+            function newProjectItem(text, modifiable = true) {
                 let element = document.createElement("li");
-                element.textContent = text;
+                element.classList.add("project-item");
+                element.innerHTML = `<span>${folderSvg} ${text}</span>`;
+
+                if (modifiable) {
+                    let deleteButton = document.createElement("button");
+                    deleteButton.classList.add("project-delete-button");
+                    deleteButton.innerHTML = deleteSvg;
+
+                    let editButton = document.createElement("button");
+                    editButton.classList.add("project-edit-button");
+                    editButton.innerHTML = editSvg;
+
+                    let buttonsContainer = document.createElement("div");
+                    buttonsContainer.classList.add("project-button-container");
+                    buttonsContainer.appendChild(deleteButton);
+                    buttonsContainer.appendChild(editButton);
+                    element.appendChild(buttonsContainer);
+                }
+
                 return element;
             }
 
             let element = document.createElement("ul");
-            element.appendChild(newListElement("Default"));
-            element.appendChild(newListElement("Project 1"));
-            element.appendChild(newListElement("Project 2"));
+            element.appendChild(newProjectItem("Default", false));
+            element.appendChild(newProjectItem("Project 1"));
+            element.appendChild(newProjectItem("Project 2"));
 
             return element;
         }();

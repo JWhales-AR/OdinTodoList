@@ -71,6 +71,12 @@ nav.sidebar {
     cursor: pointer;
 }
 
+.sidebar-view-container ul > li > span {
+    paddint-right: 0.5em;
+    display: flex;
+    gap: 0.5em;
+}
+
 #task-container ul > li:nth-child(2n),
 .sidebar-view-container ul > li:nth-child(2n) {
     margin: 0.3em 0;
@@ -81,8 +87,9 @@ nav.sidebar {
     background-color: var(--color-bg-accent);
 }
 
-.sidebar-view-container ul > li.selected:not(:hover) {
-    text-decoration: underline var(--color-fg-accent);
+.sidebar-view-container ul > li.selected:not(:hover) > span {
+    padding-right: 0.6em;
+    box-shadow: inset 0 -1px 0 0 var(--color-fg-accent);
 }
 
 #sidebar-projects-view-container ul > li {
@@ -90,7 +97,12 @@ nav.sidebar {
     margin-left: 0.5em;
 }
 
-#sidebar-projects-view-container ul > li:first-child {
+.sidebar-view-container ul > li svg {
+    fill: var(--color-fg-accent);
+    width: 1em;
+}
+
+.project-item:first-child {
     margin-top: 0.8em;
 }
 
@@ -124,6 +136,53 @@ button.project-button:active {
     box-shadow: var(--color-bg-main) 5px 5px 10pt inset;
 }
 
+.project-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-item button,
+.project-item button {
+    background-color: inherit;
+    border: none;
+}
+
+.task-button-container,
+.project-button-container {
+    display: inline-flex;
+    gap: 0.5em;
+}
+
+.task-item .task-edit-button svg,
+.task-item .task-delete-button svg,
+.project-item .project-edit-button svg,
+.project-item .project-delete-button svg {
+    display: none;
+    width: 1.3em;
+    fill: #b65454;
+}
+
+.task-item .task-delete-button:hover svg,
+.project-item .project-delete-button:hover svg {
+    fill: firebrick;
+}
+
+.task-item .task-edit-button svg,
+.project-item .project-edit-button svg {
+    fill: skyblue;
+}
+
+.task-item .task-edit-button:hover svg,
+.project-item .project-edit-button:hover svg {
+    fill: deepskyblue;
+}
+
+.task-item:hover button svg,
+.project-item:hover button svg {
+    display: inline;
+    cursor: pointer;
+}
+
 main {
     text-align: center;
     padding: 1.5em;
@@ -144,4 +203,37 @@ main {
 #task-container ul > li {
     padding: 0.8em 1em;
     max-width: 70ch;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-checkbox {
+    -moz-appearance: initial;
+    color: currentColor;
+    border: 0.15em solid currentColor;
+    width: 1.15em;
+    aspect-ratio: 1;
+    transform: translateY(-1px);
+    display: inline-grid;
+    place-content: center;
+}
+
+.task-checkbox::before {
+    content: "";
+    transform: scale(0);
+    width: 0.64em;
+    aspect-ratio: 1;
+    box-shadow: inset 1em 1em var(--color-fg-accent);
+}
+
+.task-checkbox:checked::before {
+    transform: scale(1);
+}
+
+#task-container ul > li:has(.task-checkbox:checked) span {
+    text-decoration: line-through;
 }
