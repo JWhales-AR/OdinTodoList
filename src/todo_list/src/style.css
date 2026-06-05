@@ -77,7 +77,6 @@ nav.sidebar {
     gap: 0.5em;
 }
 
-#task-container ul > li:nth-child(2n),
 .sidebar-view-container ul > li:nth-child(2n) {
     margin: 0.3em 0;
 }
@@ -197,12 +196,13 @@ main {
 }
 
 #task-container ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     margin-bottom: 1.5em;
 }
 
 #task-container ul > li {
     padding: 0.8em 1em;
-    max-width: 70ch;
 }
 
 .task-item {
