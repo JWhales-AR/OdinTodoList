@@ -1,5 +1,7 @@
 import "./style.css";
-import { mainElement, sideBar, makeTaskUpdateDialog } from "./ui";
+import mainElement from "./ui/mainelement";
+import sideBar from "./ui/sidebar";
+import makeTaskUpdateDialog from "./ui/dialog";
 
 let body = document.querySelector("body");
 
