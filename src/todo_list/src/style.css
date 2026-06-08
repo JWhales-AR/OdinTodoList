@@ -98,7 +98,7 @@ nav.sidebar {
     margin-left: 0.5em;
 }
 
-.sidebar-view-container ul > li svg {
+.sidebar-view-container li svg {
     fill: var(--color-fg-accent);
     width: 1em;
 }
@@ -150,23 +150,21 @@ button.borderless-action-button:hover {
     justify-content: space-between;
 }
 
-.task-item button,
-.project-item button {
-    background-color: inherit;
-    border: none;
-}
-
 .task-button-container,
 .project-button-container {
     display: inline-flex;
     gap: 0.5em;
 }
 
-.task-item .task-edit-button svg,
-.task-item .task-delete-button svg,
-.project-item .project-edit-button svg,
-.project-item .project-delete-button svg {
+.task-item button,
+.project-item button {
+    background-color: inherit;
+    border: none;
     display: none;
+}
+
+.task-item button svg,
+.project-item button svg {
     width: 1.3em;
     fill: #b65454;
 }
@@ -186,8 +184,8 @@ button.borderless-action-button:hover {
     fill: deepskyblue;
 }
 
-.task-item:hover button svg,
-.project-item:hover button svg {
+.task-item:hover button,
+.project-item:hover button {
     display: inline;
     cursor: pointer;
 }
