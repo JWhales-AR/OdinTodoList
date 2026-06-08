@@ -1,5 +1,10 @@
+const body = document.querySelector("body");
+
 export default function makeTaskUpdateDialog(taskName, actionName) {
-    let updateForm = function () {
+    let element = document.createElement("dialog");
+    element.classList.add("task-update-dialog");
+
+    let updateForm = function (dialog) {
         function makeFormInput(inputName, inputId, labelText, inputType, placeholderText) {
             let element = document.createElement("p");
             element.classList.add("task-update-field");
@@ -29,6 +34,8 @@ export default function makeTaskUpdateDialog(taskName, actionName) {
         }();
 
         let element = document.createElement("form");
+        element.action = "#";
+        element.onsubmit = "return false;";
         element.classList.add("task-update-form");
 
         let nameField = makeFormInput("task_name", "task-name", "Task Name", "text", "Task #");
@@ -92,14 +99,19 @@ export default function makeTaskUpdateDialog(taskName, actionName) {
         let dueDateField = makeFormInput("task_due_date", "task-due-date", "Due Date", "date");
         let taskConfirmButton = function () {
             let element = document.createElement("button");
+            element.type = "button";
             element.id = "task-confirm-button";
             element.classList.add("action-button");
             element.textContent = `${actionName} task`;
+            element.addEventListener("click", () => {
+                dialog.close();
+            });
 
             return element;
         }();
         let taskUpdateCancelButton = function () {
             let element = document.createElement("button");
+            element.type = "button";
             element.id = "task-cancel-button";
             element.classList.add("borderless-action-button");
             element.textContent = "cancel";
@@ -120,11 +132,11 @@ export default function makeTaskUpdateDialog(taskName, actionName) {
         element.appendChild(buttonsWrapper);
 
         return element;
-    }();
+    }(element);
 
-    let element = document.createElement("dialog");
-    element.classList.add("task-update-dialog");
     element.appendChild(updateForm);
+
+    body.appendChild(element);
     
     return element;
 };

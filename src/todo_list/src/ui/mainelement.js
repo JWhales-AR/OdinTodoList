@@ -1,6 +1,8 @@
 import deleteSvg from '../assets/delete.svg';
 import editSvg from '../assets/edit.svg';
 
+import makeTaskUpdateDialog from './dialog';
+
 let taskListHeader = function () {
     let element = document.createElement("h1");
     let spanProjectName = "<span id='project-name'>"
@@ -64,6 +66,10 @@ let tasksContaner = function () {
 
         return element;
     }();
+    taskAddButton.addEventListener("click", () => {
+        let dialog = makeTaskUpdateDialog("?", "create");
+        dialog.showModal();
+    })
 
     let element = document.createElement("div");
     element.id = "task-container";
@@ -76,5 +82,6 @@ let tasksContaner = function () {
 let mainElement = document.createElement("main");
 mainElement.appendChild(taskListHeader);
 mainElement.appendChild(tasksContaner);
+
 
 export default mainElement;
