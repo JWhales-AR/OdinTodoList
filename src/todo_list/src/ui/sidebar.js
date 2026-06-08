@@ -5,6 +5,42 @@ import folderSvg from '../assets/folder.svg';
 import deleteSvg from '../assets/delete.svg';
 import editSvg from '../assets/edit.svg';
 
+
+function makeNewProjectItem(text, modifiable = true) {
+    const projectsList = document.getElementById("projects-list");
+
+    let element = document.createElement("li");
+    element.classList.add("project-item");
+    element.innerHTML = `<span>${folderSvg} ${text}</span>`;
+
+    if (modifiable) {
+        let deleteButton = document.createElement("button");
+        deleteButton.classList.add("project-delete-button");
+        deleteButton.innerHTML = deleteSvg;
+
+        let editButton = document.createElement("button");
+        editButton.classList.add("project-edit-button");
+        editButton.innerHTML = editSvg;
+
+        let buttonsContainer = document.createElement("div");
+        buttonsContainer.classList.add("project-button-container");
+        buttonsContainer.appendChild(deleteButton);
+        buttonsContainer.appendChild(editButton);
+        element.appendChild(buttonsContainer);
+    }
+
+    element.addEventListener("click", () => {
+        Array.from(document.getElementsByClassName("project-item"))
+            .forEach((node) => {
+                node.classList.remove("selected");
+            });
+        element.classList.add("selected");
+    });
+
+    projectsList.appendChild(element);
+}
+
+
 let brandHeader = function () {
     let element = document.createElement("p");
     element.classList.add("sidebar-brand-header");
@@ -67,48 +103,8 @@ let projectsView = function () {
 
     }();
 
-    let projectsList = function () {
-
-        function newProjectItem(text, modifiable = true) {
-
-            let element = document.createElement("li");
-            element.classList.add("project-item");
-            element.innerHTML = `<span>${folderSvg} ${text}</span>`;
-
-            if (modifiable) {
-                let deleteButton = document.createElement("button");
-                deleteButton.classList.add("project-delete-button");
-                deleteButton.innerHTML = deleteSvg;
-
-                let editButton = document.createElement("button");
-                editButton.classList.add("project-edit-button");
-                editButton.innerHTML = editSvg;
-
-                let buttonsContainer = document.createElement("div");
-                buttonsContainer.classList.add("project-button-container");
-                buttonsContainer.appendChild(deleteButton);
-                buttonsContainer.appendChild(editButton);
-                element.appendChild(buttonsContainer);
-            }
-
-            element.addEventListener("click", () => {
-                Array.from(document.getElementsByClassName("project-item"))
-                    .forEach((node) => {
-                        node.classList.remove("selected");
-                    });
-                element.classList.add("selected");
-            });
-
-            return element;
-        }
-
-        let element = document.createElement("ul");
-        element.appendChild(newProjectItem("Default", false));
-        element.appendChild(newProjectItem("Project 1"));
-        element.appendChild(newProjectItem("Project 2"));
-
-        return element;
-    }();
+    let projectsList = document.createElement("ul");
+    projectsList.id = "projects-list";
 
     let element = document.createElement("div");
     element.id = "sidebar-projects-view-container";
@@ -126,4 +122,5 @@ sideBar.appendChild(brandHeader);
 sideBar.appendChild(tasksView);
 sideBar.appendChild(projectsView);
 
-export default sideBar;
+
+export { sideBar, makeNewProjectItem };
