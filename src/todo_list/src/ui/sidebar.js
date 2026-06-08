@@ -70,6 +70,7 @@ let projectsView = function () {
     let projectsList = function () {
 
         function newProjectItem(text, modifiable = true) {
+
             let element = document.createElement("li");
             element.classList.add("project-item");
             element.innerHTML = `<span>${folderSvg} ${text}</span>`;
@@ -89,6 +90,14 @@ let projectsView = function () {
                 buttonsContainer.appendChild(editButton);
                 element.appendChild(buttonsContainer);
             }
+
+            element.addEventListener("click", () => {
+                Array.from(document.getElementsByClassName("project-item"))
+                    .forEach((node) => {
+                        node.classList.remove("selected");
+                    });
+                element.classList.add("selected");
+            });
 
             return element;
         }
