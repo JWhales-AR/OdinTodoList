@@ -115,6 +115,7 @@ export default function makeTaskUpdateDialog(taskName, actionName) {
             element.id = "task-cancel-button";
             element.classList.add("borderless-action-button");
             element.textContent = "cancel";
+            element.addEventListener("click", () => dialog.close());
 
             return element;
         }();

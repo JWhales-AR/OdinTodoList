@@ -5,6 +5,8 @@ import folderSvg from '../assets/folder.svg';
 import deleteSvg from '../assets/delete.svg';
 import editSvg from '../assets/edit.svg';
 
+import makeProjectUpdateDialog from './project-update-dialog';
+
 
 function makeNewProjectItem(text, modifiable = true) {
     const projectsList = document.getElementById("projects-list");
@@ -85,6 +87,10 @@ let projectsView = function () {
             element.id = "add-project-button";
             element.classList.add("action-button");
             element.textContent = "+ Project";
+            element.addEventListener("click", () => {
+                let dialog = makeProjectUpdateDialog("?", "create");
+                dialog.showModal();
+            });
 
             return element;
         }();

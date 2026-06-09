@@ -255,6 +255,7 @@ main {
     text-decoration: line-through;
 }
 
+.project-update-dialog,
 .task-update-dialog {
     padding: 1.5em;
     width: min(60%, 65ch);
@@ -270,10 +271,12 @@ main {
                 -2pt -2pt 10pt -2pt var(--color-bg-main);
 }
 
+.project-update-dialog::backdrop,
 .task-update-dialog::backdrop {
     backdrop-filter: blur(5pt);
 }
 
+.project-update-form,
 .task-update-form {
     display: flex;
     flex-direction: column;
@@ -283,20 +286,25 @@ main {
     padding: 1.5em;
 }
 
+.project-update-form > h1,
 .task-update-form > h1 {
     border-bottom: 1pt solid var(--color-fg-accent);
 }
 
+.project-update-field,
 .task-update-field {
     display: flex;
     flex-direction: column;
     gap: 0.4em;
 }
 
+.project-update-field > label,
 .task-update-field > label {
     font-weight: 800;
 }
 
+.project-update-field > input[type="text"],
+.project-update-field > textarea,
 .task-update-field > textarea,
 .task-update-field > input[type="date"],
 .task-update-field > input[type="text"] {
@@ -308,11 +316,14 @@ main {
     outline: none;
 }
 
+.project-update-field > input:focus,
+.project-update-field > textarea:focus,
 .task-update-field > textarea:focus,
 .task-update-field > input:focus {
     outline: 1pt solid var(--color-fg-accent);
 }
 
+.project-update-field > textarea,
 .task-update-field > textarea {
     font-size: 1.1em;
     resize: vertical;
@@ -328,6 +339,7 @@ main {
     gap: 0.4em;
 }
 
+.project-update-form .buttons-wrapper,
 .task-update-form .buttons-wrapper {
     margin-top: 1.5em;
     display: flex;
