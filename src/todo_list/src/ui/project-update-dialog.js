@@ -13,7 +13,7 @@ export default function makeProjectUpdateDialog(projectName, actionName) {
             input.name = "project_name";
             input.type = "text";
             input.id = "project-id";
-            input.placeholder = "Project #";
+            input.placeholder = projectName === "?" ? "Project #" : projectName;
 
             let label = document.createElement("label");
             label.textContent = "Project Name";
@@ -26,6 +26,9 @@ export default function makeProjectUpdateDialog(projectName, actionName) {
         }();
 
         let formHeader = function () {
+            projectName = projectName.length > 5 ?
+                `${projectName.substr(0, 3)}..` : projectName;
+
             let element = document.createElement("h1");
             element.textContent = `project<${projectName}>.${actionName}()`;
 

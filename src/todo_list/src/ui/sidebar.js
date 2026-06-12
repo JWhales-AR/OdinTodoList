@@ -19,10 +19,18 @@ function makeNewProjectItem(text, modifiable = true) {
         let deleteButton = document.createElement("button");
         deleteButton.classList.add("project-delete-button");
         deleteButton.innerHTML = deleteSvg;
+        deleteButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+        });
 
         let editButton = document.createElement("button");
         editButton.classList.add("project-edit-button");
         editButton.innerHTML = editSvg;
+        editButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            let projectName = "veryLongProjectName";
+            makeProjectUpdateDialog(projectName, "edit").showModal();
+        });
 
         let buttonsContainer = document.createElement("div");
         buttonsContainer.classList.add("project-button-container");
