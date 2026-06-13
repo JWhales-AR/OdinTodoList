@@ -12,6 +12,7 @@ function makeNewProjectItem(text, modifiable = true) {
     const projectsList = document.getElementById("projects-list");
 
     let element = document.createElement("li");
+    element.id = crypto.randomUUID();
     element.classList.add("project-item");
     element.innerHTML = `<span>${folderSvg} ${text}</span>`;
 
@@ -20,6 +21,7 @@ function makeNewProjectItem(text, modifiable = true) {
         deleteButton.classList.add("project-delete-button");
         deleteButton.innerHTML = deleteSvg;
         deleteButton.addEventListener("click", (event) => {
+            document.getElementById(element.id).remove();
             event.stopPropagation();
         });
 
