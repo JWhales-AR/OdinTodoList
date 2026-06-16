@@ -1,7 +1,7 @@
 import deleteSvg from '../assets/delete.svg';
 import editSvg from '../assets/edit.svg';
 
-import makeTaskUpdateDialog from './task-update-dialog';
+import makeTaskUpdateDialog from './task-update-dialog.js';
 
 let taskListHeader = function () {
     let element = document.createElement("h1");

@@ -11,6 +11,7 @@
   "license": "MIT",
   "author": "Alex Rosegrid",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "serve": "webpack serve --open --config webpack.dev.js",

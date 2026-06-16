@@ -1,6 +1,6 @@
 import "./style.css";
-import { mainElement, makeNewTaskItem } from "./ui/mainelement";
-import { sideBar, makeNewProjectItem } from "./ui/sidebar";
+import { mainElement, makeNewTaskItem } from "./ui/mainelement.js";
+import { sideBar, makeNewProjectItem } from "./ui/sidebar.js";
 
 const body = document.querySelector("body");
 

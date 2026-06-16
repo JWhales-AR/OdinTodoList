@@ -5,7 +5,7 @@ import folderSvg from '../assets/folder.svg';
 import deleteSvg from '../assets/delete.svg';
 import editSvg from '../assets/edit.svg';
 
-import makeProjectUpdateDialog from './project-update-dialog';
+import makeProjectUpdateDialog from './project-update-dialog.js';
 
 
 function makeNewProjectItem(text, modifiable = true) {
