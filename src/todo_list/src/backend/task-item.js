@@ -14,6 +14,10 @@ export default class TaskItem {
 
     getProjectID() { return this.#projectID; }
 
+    getNameDuePriority() {
+        return `${this.name} | Due ${this.dueDate} | ${this.priority}`
+    }
+
     stringify() {
         return JSON.stringify({
             privates: {

@@ -6,15 +6,16 @@ import deleteSvg from '../assets/delete.svg';
 import editSvg from '../assets/edit.svg';
 
 import makeProjectUpdateDialog from './project-update-dialog.js';
+import ProjectItem from '../backend/project-item.js';
 
 
-function makeNewProjectItem(text, modifiable = true) {
+function makeNewProjectItem(projectItem, modifiable = true) {
     const projectsList = document.getElementById("projects-list");
 
     let element = document.createElement("li");
-    element.id = crypto.randomUUID();
+    element.id = projectItem.getUUID();
     element.classList.add("project-item");
-    element.innerHTML = `<span>${folderSvg} ${text}</span>`;
+    element.innerHTML = `<span>${folderSvg} ${projectItem.name}</span>`;
 
     if (modifiable) {
         let deleteButton = document.createElement("button");
@@ -30,8 +31,7 @@ function makeNewProjectItem(text, modifiable = true) {
         editButton.innerHTML = editSvg;
         editButton.addEventListener("click", (event) => {
             event.stopPropagation();
-            let projectName = "veryLongProjectName";
-            makeProjectUpdateDialog(projectName, "edit").showModal();
+            makeProjectUpdateDialog(projectItem, "edit").showModal();
         });
 
         let buttonsContainer = document.createElement("div");
@@ -98,7 +98,7 @@ let projectsView = function () {
             element.classList.add("action-button");
             element.textContent = "+ Project";
             element.addEventListener("click", () => {
-                let dialog = makeProjectUpdateDialog("?", "create");
+                let dialog = makeProjectUpdateDialog(new ProjectItem("?"), "create");
                 dialog.showModal();
             });
 

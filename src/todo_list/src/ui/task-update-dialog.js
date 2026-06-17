@@ -1,6 +1,7 @@
 const body = document.querySelector("body");
 
-export default function makeTaskUpdateDialog(taskName, actionName) {
+export default function makeTaskUpdateDialog(taskItem, actionName) {
+    let taskName = taskItem.name;
     let element = document.createElement("dialog");
     element.classList.add("task-update-dialog");
 
@@ -27,8 +28,11 @@ export default function makeTaskUpdateDialog(taskName, actionName) {
         }
 
         let formHeader = function () {
+            let taskNameShort = taskName.length > 5 ?
+                `${taskName.substr(0, 3)}..` : taskName;
+
             let element = document.createElement("h1");
-            element.textContent = `task<${taskName}>.${actionName}()`;
+            element.textContent = `task<${taskNameShort}>.${actionName}()`;
 
             return element;
         }();
@@ -38,13 +42,17 @@ export default function makeTaskUpdateDialog(taskName, actionName) {
         element.onsubmit = "return false;";
         element.classList.add("task-update-form");
 
-        let nameField = makeFormInput("task_name", "task-name", "Task Name", "text", "Task #");
+        let nameField = makeFormInput(
+            "task_name", "task-name", "Task Name", "text",
+            taskName === "?"? "Task #" : taskName
+        );
         let descriptionField = function () {
             let element = document.createElement("p");
             element.classList.add("task-update-field");
 
             let input = document.createElement("textarea");
-            input.placeholder = "Description...";
+            input.placeholder = taskItem.description === undefined?
+                "Description..." : taskItem.description;
             input.name = "task_description";
             input.id = "task-description";
 

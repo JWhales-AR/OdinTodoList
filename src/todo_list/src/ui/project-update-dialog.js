@@ -1,6 +1,8 @@
 const body = document.querySelector("body");
 
-export default function makeProjectUpdateDialog(projectName, actionName) {
+export default function makeProjectUpdateDialog(projectItem, actionName) {
+    let projectName = projectItem.name;
+
     let element = document.createElement("dialog");
     element.classList.add("project-update-dialog");
 
@@ -45,7 +47,8 @@ export default function makeProjectUpdateDialog(projectName, actionName) {
             element.classList.add("project-update-field");
 
             let input = document.createElement("textarea");
-            input.placeholder = "Notes...";
+            input.placeholder = projectItem.notes === undefined?
+                "Notes..." : projectItem.notes;
             input.name = "project_notes";
             input.id = "project-notes";
 
