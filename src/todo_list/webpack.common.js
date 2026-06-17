@@ -13,7 +13,9 @@ export default {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/template.html"
+            template: "./src/template.html",
+            favicon: "./src/assets/favicon.png",
+            // Favicon Credits: <a href="https://www.flaticon.com/free-icons/list" title="list icons">List icons created by Freepik - Flaticon</a>
         }),
     ],
     module: {
