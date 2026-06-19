@@ -4,9 +4,10 @@ export default class ProjectItem {
     #UUID = crypto.randomUUID();
     #taskItems = [];
 
-    constructor(name, notes) {
+    constructor(name, notes, modifiable = true) {
         this.name = name;
         this.notes = notes;
+        this.modifiable = modifiable;
     }
 
     getUUID() { return this.#UUID; }

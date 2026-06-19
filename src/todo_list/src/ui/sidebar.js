@@ -16,7 +16,7 @@ function resetProjectSelection(element, projectItem) {
             node.classList.remove("selected");
         });
     element.classList.add("selected");
-    projectItemList.selectedProjectID = projectItem.getUUID();
+    projectItemList.setSelectedProjectID(projectItem);
     document.getElementById("project-name").textContent = projectItem.name;
 }
 
@@ -26,7 +26,7 @@ function updateProjectItemDisplay(projectItem) {
     checkboxTaskText.innerHTML =  `${folderSvg} ${projectItem.name}`;
 }
 
-function makeNewProjectItem(projectItem, modifiable = true, selected = false) {
+function makeNewProjectItem(projectItem) {
     const projectsList = document.getElementById("projects-list");
 
     let element = document.createElement("li");
@@ -34,7 +34,7 @@ function makeNewProjectItem(projectItem, modifiable = true, selected = false) {
     element.classList.add("project-item");
     element.innerHTML = `<span>${folderSvg} ${projectItem.name}</span>`;
 
-    if (modifiable) {
+    if (projectItem.modifiable) {
         let deleteButton = document.createElement("button");
         deleteButton.classList.add("project-delete-button");
         deleteButton.innerHTML = deleteSvg;
@@ -63,10 +63,14 @@ function makeNewProjectItem(projectItem, modifiable = true, selected = false) {
     );
 
     projectsList.appendChild(element);
-    projectItemList.appendProject(projectItem);
-    if (selected) {
+    if (projectItem.getUUID() === projectItemList.selectedProjectID) {
         element.classList.add("selected");
-        projectItemList.selectedProjectID = projectItem.getUUID();
+    }
+}
+
+function renderProjectItems() {
+    for (let projectItem of projectItemList.getProjectItems()) {
+        makeNewProjectItem(projectItem);
     }
 }
 
@@ -160,4 +164,4 @@ sideBar.appendChild(tasksView);
 sideBar.appendChild(projectsView);
 
 
-export { sideBar, makeNewProjectItem };
+export { sideBar, makeNewProjectItem, renderProjectItems };

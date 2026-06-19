@@ -1,3 +1,5 @@
+import projectItemList from "../backend/storage.js";
+
 const body = document.querySelector("body");
 
 export default function makeTaskUpdateDialog(taskItem, actionName, refreshCommand) {
@@ -134,6 +136,9 @@ export default function makeTaskUpdateDialog(taskItem, actionName, refreshComman
                 if (refreshCommand !== undefined) {
                     refreshCommand(taskItem);
                 }
+                if (actionName === "create") {
+                    projectItemList.appendTaskToSelectedProject(taskItem);
+                }
 
                 dialog.remove();
             });
@@ -169,7 +174,6 @@ export default function makeTaskUpdateDialog(taskItem, actionName, refreshComman
     element.appendChild(updateForm);
 
     body.appendChild(element);
-    console.log(taskItem);
     
     return element;
 };

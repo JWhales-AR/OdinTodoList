@@ -1,3 +1,5 @@
+import projectItemList from "../backend/storage.js";
+
 const body = document.querySelector("body");
 
 export default function makeProjectUpdateDialog(projectItem, actionName, refreshCommand) {
@@ -77,6 +79,9 @@ export default function makeProjectUpdateDialog(projectItem, actionName, refresh
 
                 if (refreshCommand !== undefined) {
                     refreshCommand(projectItem);
+                }
+                if (actionName === "create") {
+                    projectItemList.appendProject(projectItem);
                 }
 
                 dialog.remove();

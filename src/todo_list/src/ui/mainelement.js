@@ -12,8 +12,6 @@ function updateTaskItemDisplay(taskItem) {
 }
 
 function makeNewTaskItem(taskItem) {
-    projectItemList.appendTaskToSelectedProject(taskItem);
-
     let element = document.createElement("li");
     element.classList.add("task-item");
     element.id = taskItem.getUUID();
@@ -31,8 +29,8 @@ function makeNewTaskItem(taskItem) {
     editButton.classList.add("task-edit-button");
     editButton.innerHTML = editSvg;
     editButton.addEventListener("click", (event) => {
-        let dialog = makeTaskUpdateDialog(taskItem, "edit", updateTaskItemDisplay);
-        dialog.showModal();
+        makeTaskUpdateDialog(taskItem, "edit", updateTaskItemDisplay)
+            .showModal();
         event.stopPropagation();
     })
 
@@ -55,6 +53,15 @@ function makeNewTaskItem(taskItem) {
 
     const tasksList = document.getElementById("tasks-list");
     tasksList.appendChild(element);
+}
+
+function renderTaskItemsInSelectedProject() {
+    let selectedProject = projectItemList.getSelectedProject();
+    if (selectedProject !== undefined) {
+        for (let taskItem of selectedProject.getTaskItems()) {
+            makeNewTaskItem(taskItem);
+        }
+    }
 }
 
 
@@ -102,4 +109,4 @@ mainElement.appendChild(taskListHeader);
 mainElement.appendChild(tasksContaner);
 
 
-export { mainElement, makeNewTaskItem };
+export { mainElement, makeNewTaskItem, renderTaskItemsInSelectedProject };
