@@ -192,13 +192,13 @@ button.borderless-action-button:hover {
 
 main {
     text-align: center;
-    padding: 1.5em;
+    padding: min(1%, 1.5em);
     background-color: var(--color-bg-main);
     flex-grow: 1;
 }
 
 #task-container {
-    padding: 2em;
+    padding: min(1%, 2em);
     margin-top: 2.5em;
     text-align: left;
 }
