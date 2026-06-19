@@ -10,6 +10,16 @@ import ProjectItem from '../backend/project-item.js';
 import projectItemList from '../backend/storage.js';
 
 
+function resetProjectSelection(element, projectItem) {
+    Array.from(document.getElementsByClassName("project-item"))
+        .forEach((node) => {
+            node.classList.remove("selected");
+        });
+    element.classList.add("selected");
+    projectItemList.selectedProjectID = projectItem.getUUID();
+    document.getElementById("project-name").textContent = projectItem.name;
+}
+
 function updateProjectItemDisplay(projectItem) {
     const checkboxTaskText = document.getElementById(`${projectItem.getUUID()}`)
         .querySelector(".project-item span");
@@ -48,17 +58,14 @@ function makeNewProjectItem(projectItem, modifiable = true, selected = false) {
         element.appendChild(buttonsContainer);
     }
 
-    element.addEventListener("click", () => {
-        Array.from(document.getElementsByClassName("project-item"))
-            .forEach((node) => {
-                node.classList.remove("selected");
-            });
-        element.classList.add("selected");
-    });
+    element.addEventListener("click", () =>
+        resetProjectSelection(element, projectItem)
+    );
 
     projectsList.appendChild(element);
     projectItemList.appendProject(projectItem);
     if (selected) {
+        element.classList.add("selected");
         projectItemList.selectedProjectID = projectItem.getUUID();
     }
 }
@@ -76,17 +83,20 @@ let tasksView = function () {
 
     let optionsList = function () {
 
-        function newGlobalOption(text) {
+        function newGlobalOption(text, projectSubDir) {
             let element = document.createElement("li");
             element.classList.add("task-global-option");
             element.innerHTML = `<span>${text}</span>`;
+            element.addEventListener("click", () => {
+                document.getElementById("project-sub-dir").textContent = projectSubDir;
+            });
             return element;
         }
 
         let element = document.createElement("ul");
-        element.appendChild(newGlobalOption(`${calendarAllSvg} All Tasks`));
-        element.appendChild(newGlobalOption(`${todaySvg} Due Today`));
-        element.appendChild(newGlobalOption(`${incompleteSvg} Incomplete Tasks`));
+        element.appendChild(newGlobalOption(`${calendarAllSvg} All Tasks`, "All"));
+        element.appendChild(newGlobalOption(`${todaySvg} Due Today`, "Today"));
+        element.appendChild(newGlobalOption(`${incompleteSvg} Incomplete Tasks`, "Incomplete"));
 
         return element;
     }();

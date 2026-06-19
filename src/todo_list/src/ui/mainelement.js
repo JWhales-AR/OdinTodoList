@@ -61,7 +61,7 @@ function makeNewTaskItem(taskItem) {
 let taskListHeader = function () {
     let element = document.createElement("h1");
     let spanProjectName = "<span id='project-name'>"
-        + "TASKS" + "</span>";
+        + "Default" + "</span>";
     let spanProjectSubDir =
         "<span id='project-sub-dir' class='accent-text'>"
             + "All" + "</span>";
