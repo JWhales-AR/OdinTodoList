@@ -21,6 +21,12 @@ export default class ProjectItem {
         this.#taskItems.push(taskItem);
     }
 
+    removeTaskItem(taskItemToRemove) {
+        this.#taskItems.splice(this.#taskItems.find(taskItem =>
+            taskItem.getUUID() === taskItemToRemove.getUUID()
+        ), 1);
+    }
+
     stringify() {
         return JSON.stringify({
             privates: {

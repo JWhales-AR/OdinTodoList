@@ -1,6 +1,6 @@
 const body = document.querySelector("body");
 
-export default function makeProjectUpdateDialog(projectItem, actionName) {
+export default function makeProjectUpdateDialog(projectItem, actionName, refreshCommand) {
     let projectName = projectItem.name;
 
     let element = document.createElement("dialog");
@@ -14,7 +14,7 @@ export default function makeProjectUpdateDialog(projectItem, actionName) {
             let input = document.createElement("input");
             input.name = "project_name";
             input.type = "text";
-            input.id = "project-id";
+            input.id = "dialog-project-name";
             input.placeholder = projectName === "?" ? "Project #" : projectName;
 
             let label = document.createElement("label");
@@ -42,7 +42,7 @@ export default function makeProjectUpdateDialog(projectItem, actionName) {
         element.onsubmit = "return false;";
         element.classList.add("project-update-form");
 
-        let descriptionField = function () {
+        let notesField = function () {
             let element = document.createElement("p");
             element.classList.add("project-update-field");
 
@@ -50,7 +50,7 @@ export default function makeProjectUpdateDialog(projectItem, actionName) {
             input.placeholder = projectItem.notes === undefined?
                 "Notes..." : projectItem.notes;
             input.name = "project_notes";
-            input.id = "project-notes";
+            input.id = "dialog-project-notes";
 
             let label = document.createElement("label");
             label.textContent = "Notes";
@@ -68,7 +68,18 @@ export default function makeProjectUpdateDialog(projectItem, actionName) {
             element.classList.add("action-button");
             element.textContent = `${actionName} project`;
             element.addEventListener("click", () => {
-                dialog.close();
+                let projectNameInput = document.getElementById("dialog-project-name");
+                projectItem.name = projectNameInput.value.length > 0?
+                    projectNameInput.value : projectNameInput.placeholder;
+                let projectNotesInput = document.getElementById("dialog-project-notes");
+                projectItem.description = projectNotesInput.value.length > 0?
+                    projectNotesInput.value : projectNotesInput.placeholder;
+
+                if (refreshCommand !== undefined) {
+                    refreshCommand(projectItem);
+                }
+
+                dialog.remove();
             });
 
             return element;
@@ -79,7 +90,7 @@ export default function makeProjectUpdateDialog(projectItem, actionName) {
             element.id = "project-cancel-button";
             element.classList.add("borderless-action-button");
             element.textContent = "cancel";
-            element.addEventListener("click", () => dialog.close());
+            element.addEventListener("click", () => dialog.remove());
 
             return element;
         }();
@@ -91,7 +102,7 @@ export default function makeProjectUpdateDialog(projectItem, actionName) {
 
         element.appendChild(formHeader);
         element.appendChild(nameField);
-        element.appendChild(descriptionField);
+        element.appendChild(notesField);
         element.appendChild(buttonsWrapper);
 
         return element;

@@ -1,3 +1,9 @@
+import { format } from "date-fns";
+
+function capitalize(string) {
+    return string[0].toUpperCase() + string.substr(1);
+}
+
 export default class TaskItem {
     #UUID = crypto.randomUUID();
     #projectID;
@@ -13,9 +19,10 @@ export default class TaskItem {
     getUUID() { return this.#UUID; }
 
     getProjectID() { return this.#projectID; }
+    setProjectID(projectID) { this.#projectID = projectID; }
 
     getNameDuePriority() {
-        return `${this.name} | Due ${this.dueDate} | ${this.priority}`
+        return `${this.name} | Due ${format(this.dueDate, "eee, dd MMMM")} | ${capitalize(this.priority)}`
     }
 
     stringify() {

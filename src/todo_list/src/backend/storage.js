@@ -1,5 +1,4 @@
 import ProjectItem from "./project-item.js";
-import TaskItem from "./task-item.js";
 
 let storage;
 try {
@@ -18,15 +17,35 @@ try {
     }
 }
 
-export default class ProjectItemList {
+export class ProjectItemList {
     #projectItems;
 
-    constructor() {
+    constructor(selectedProjectID) {
         this.#projectItems = [];
+        this.selectedProjectID = selectedProjectID;
     }
 
     appendProject(projectItem) {
         this.#projectItems.push(projectItem);
+    }
+
+    appendTaskToSelectedProject(taskItem) {
+        taskItem.setProjectID(this.selectedProjectID);
+        for (let projectItem of this.#projectItems) {
+            if (projectItem.getUUID() === this.selectedProjectID) {
+                projectItem.appendTaskItem(taskItem);
+                break;
+            }
+        }
+    }
+
+    removeTaskFromSelectedProject(taskItem) {
+        for (let projectItem of this.#projectItems) {
+            if (projectItem.getUUID() === taskItem.getProjectID()) {
+                projectItem.removeTaskItem(taskItem);
+                break;
+            }
+        }
     }
 
     getProjectItems = function * () {
@@ -52,3 +71,6 @@ export default class ProjectItemList {
             ));
     }
 }
+
+let projectItemList = new ProjectItemList();
+export default projectItemList;

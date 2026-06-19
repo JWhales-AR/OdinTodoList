@@ -9,10 +9,10 @@ const body = document.querySelector("body");
 body.appendChild(sideBar);
 body.appendChild(mainElement);
 
-makeNewTaskItem(new TaskItem("Dummy Task 1", "Description...", "10-05-2026", "High"));
-makeNewTaskItem(new TaskItem("Dummy Task 2", "Some Strange Task", "10-08-2026", "Medium"));
-makeNewTaskItem(new TaskItem("Dummy Task 2", "I don't care anymore", "10-05-2026", "Low"));
-
-makeNewProjectItem(new ProjectItem("Default", "The Default Project"), false);
+makeNewProjectItem(new ProjectItem("Default", "The Default Project"), false, true);
 makeNewProjectItem(new ProjectItem("Project 1", "Contains stuff belonging to Project 1"));
 makeNewProjectItem(new ProjectItem("Project 2", "You know the drill"));
+
+makeNewTaskItem(new TaskItem("Dummy Task 1", "Description...", new Date(), "high"));
+makeNewTaskItem(new TaskItem("Dummy Task 2", "Some Strange Task", new Date(), "medium"));
+makeNewTaskItem(new TaskItem("Dummy Task 2", "I don't care anymore", new Date(), "low"));

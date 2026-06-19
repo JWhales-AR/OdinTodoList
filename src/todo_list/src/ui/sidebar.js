@@ -7,9 +7,16 @@ import editSvg from '../assets/edit.svg';
 
 import makeProjectUpdateDialog from './project-update-dialog.js';
 import ProjectItem from '../backend/project-item.js';
+import projectItemList from '../backend/storage.js';
 
 
-function makeNewProjectItem(projectItem, modifiable = true) {
+function updateProjectItemDisplay(projectItem) {
+    const checkboxTaskText = document.getElementById(`${projectItem.getUUID()}`)
+        .querySelector(".project-item span");
+    checkboxTaskText.innerHTML =  `${folderSvg} ${projectItem.name}`;
+}
+
+function makeNewProjectItem(projectItem, modifiable = true, selected = false) {
     const projectsList = document.getElementById("projects-list");
 
     let element = document.createElement("li");
@@ -30,8 +37,8 @@ function makeNewProjectItem(projectItem, modifiable = true) {
         editButton.classList.add("project-edit-button");
         editButton.innerHTML = editSvg;
         editButton.addEventListener("click", (event) => {
+            makeProjectUpdateDialog(projectItem, "edit", updateProjectItemDisplay).showModal();
             event.stopPropagation();
-            makeProjectUpdateDialog(projectItem, "edit").showModal();
         });
 
         let buttonsContainer = document.createElement("div");
@@ -50,6 +57,10 @@ function makeNewProjectItem(projectItem, modifiable = true) {
     });
 
     projectsList.appendChild(element);
+    projectItemList.appendProject(projectItem);
+    if (selected) {
+        projectItemList.selectedProjectID = projectItem.getUUID();
+    }
 }
 
 
@@ -98,8 +109,8 @@ let projectsView = function () {
             element.classList.add("action-button");
             element.textContent = "+ Project";
             element.addEventListener("click", () => {
-                let dialog = makeProjectUpdateDialog(new ProjectItem("?"), "create");
-                dialog.showModal();
+                makeProjectUpdateDialog(new ProjectItem("?"), "create", makeNewProjectItem)
+                    .showModal();
             });
 
             return element;

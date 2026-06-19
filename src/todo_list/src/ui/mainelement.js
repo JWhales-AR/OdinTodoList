@@ -1,8 +1,62 @@
 import deleteSvg from '../assets/delete.svg';
 import editSvg from '../assets/edit.svg';
 import TaskItem from '../backend/task-item.js';
-
+import projectItemList from '../backend/storage.js';
 import makeTaskUpdateDialog from './task-update-dialog.js';
+
+
+function updateTaskItemDisplay(taskItem) {
+    const checkboxTaskText = document.getElementById(`${taskItem.getUUID()}`)
+        .querySelector(".task-checkbox-wrapper span");
+    checkboxTaskText.innerHTML = taskItem.getNameDuePriority();
+}
+
+function makeNewTaskItem(taskItem) {
+    projectItemList.appendTaskToSelectedProject(taskItem);
+
+    let element = document.createElement("li");
+    element.classList.add("task-item");
+    element.id = taskItem.getUUID();
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("task-delete-button");
+    deleteButton.innerHTML = deleteSvg;
+    deleteButton.addEventListener("click", (event) => {
+        document.getElementById(element.id).remove();
+        projectItemList.removeTaskFromSelectedProject(taskItem);
+        event.stopPropagation();
+    })
+
+    let editButton = document.createElement("button");
+    editButton.classList.add("task-edit-button");
+    editButton.innerHTML = editSvg;
+    editButton.addEventListener("click", (event) => {
+        let dialog = makeTaskUpdateDialog(taskItem, "edit", updateTaskItemDisplay);
+        dialog.showModal();
+        event.stopPropagation();
+    })
+
+    let buttonsContainer = document.createElement("div");
+    buttonsContainer.classList.add("task-button-container");
+    buttonsContainer.appendChild(deleteButton);
+    buttonsContainer.appendChild(editButton);
+
+    let checkbox = document.createElement("input");
+    checkbox.classList.add("task-checkbox");
+    checkbox.type = "checkbox";
+
+    let checkboxTaskWrapper = document.createElement("div");
+    checkboxTaskWrapper.classList.add("task-checkbox-wrapper");
+    checkboxTaskWrapper.appendChild(checkbox);
+    checkboxTaskWrapper.innerHTML += ` <span>${taskItem.getNameDuePriority()}</span>`;
+
+    element.appendChild(checkboxTaskWrapper);
+    element.appendChild(buttonsContainer);
+
+    const tasksList = document.getElementById("tasks-list");
+    tasksList.appendChild(element);
+}
+
 
 let taskListHeader = function () {
     let element = document.createElement("h1");
@@ -31,7 +85,7 @@ let tasksContaner = function () {
         return element;
     }();
     taskAddButton.addEventListener("click", () => {
-        let dialog = makeTaskUpdateDialog(new TaskItem("?"), "create");
+        let dialog = makeTaskUpdateDialog(new TaskItem("?"), "create", makeNewTaskItem);
         dialog.showModal();
     })
 
@@ -46,49 +100,6 @@ let tasksContaner = function () {
 let mainElement = document.createElement("main");
 mainElement.appendChild(taskListHeader);
 mainElement.appendChild(tasksContaner);
-
-
-function makeNewTaskItem(taskItem) {
-    let element = document.createElement("li");
-    element.classList.add("task-item");
-    element.id = taskItem.getUUID();
-
-    let deleteButton = document.createElement("button");
-    deleteButton.classList.add("task-delete-button");
-    deleteButton.innerHTML = deleteSvg;
-    deleteButton.addEventListener("click", (event) => {
-        document.getElementById(element.id).remove();
-        event.stopPropagation();
-    })
-
-    let editButton = document.createElement("button");
-    editButton.classList.add("task-edit-button");
-    editButton.innerHTML = editSvg;
-    editButton.addEventListener("click", (event) => {
-        let dialog = makeTaskUpdateDialog(taskItem, "create");
-        dialog.showModal();
-        event.stopPropagation();
-    })
-
-    let buttonsContainer = document.createElement("div");
-    buttonsContainer.classList.add("task-button-container");
-    buttonsContainer.appendChild(deleteButton);
-    buttonsContainer.appendChild(editButton);
-
-    let checkbox = document.createElement("input");
-    checkbox.classList.add("task-checkbox");
-    checkbox.type = "checkbox";
-
-    let checkboxTaskWrapper = document.createElement("div");
-    checkboxTaskWrapper.appendChild(checkbox);
-    checkboxTaskWrapper.innerHTML += ` <span>${taskItem.getNameDuePriority()}</span>`;
-
-    element.appendChild(checkboxTaskWrapper);
-    element.appendChild(buttonsContainer);
-
-    const tasksList = document.getElementById("tasks-list");
-    tasksList.appendChild(element);
-}
 
 
 export { mainElement, makeNewTaskItem };
