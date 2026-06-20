@@ -43,6 +43,7 @@ export default class TaskItem {
     static parse(taskItemStringified) {
         let loadedTaskItem = JSON.parse(taskItemStringified);
         let taskItem = Object.assign(new TaskItem, loadedTaskItem.data);
+        taskItem.dueDate = new Date(taskItem.dueDate);
         taskItem.#UUID = loadedTaskItem.privates.UUID;
         taskItem.#projectID = loadedTaskItem.privates.projectID;
         return taskItem;

@@ -75,10 +75,6 @@ function renderTaskItemsInSelectedProject() {
             makeNewTaskItem(taskItem);
         }
     }
-    // Array.from(document.getElementsByClassName("task-checkbox"))
-    //     .forEach(node => node.addEventListener("change", event => {
-    //         console.log(event.target);
-    //     }))
 }
 
 
