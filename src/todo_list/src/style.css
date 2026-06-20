@@ -67,7 +67,7 @@ nav.sidebar {
     list-style: none;
 }
 
-#task-container ul > li,
+.task-item,
 .sidebar-view-container ul > li {
     padding: 0.8em 0.5em;
     border-radius: 4pt;
@@ -84,7 +84,7 @@ nav.sidebar {
     margin: 0.3em 0;
 }
 
-#task-container ul > li:hover,
+.task-item:hover,
 .sidebar-view-container ul > li:hover {
     background-color: var(--color-bg-accent);
 }
@@ -209,7 +209,7 @@ main {
     margin-bottom: 1.5em;
 }
 
-#task-container ul > li {
+.task-item {
     padding: 0.8em 1em;
 }
 
@@ -251,7 +251,7 @@ main {
     transform: scale(1);
 }
 
-#task-container ul > li:has(.task-checkbox:checked) span {
+.task-item:has(.task-checkbox:checked) span {
     text-decoration: line-through;
 }
 
