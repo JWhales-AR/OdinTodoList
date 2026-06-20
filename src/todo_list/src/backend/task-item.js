@@ -14,9 +14,14 @@ export default class TaskItem {
         this.dueDate = dueDate;
         this.priority = priority;
         this.#projectID = projectID;
+        this.completed = false;
     }
 
     getUUID() { return this.#UUID; }
+
+    toggleCompletion() {
+        this.completed = !this.completed;
+    }
 
     getProjectID() { return this.#projectID; }
     setProjectID(projectID) { this.#projectID = projectID; }

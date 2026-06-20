@@ -108,6 +108,4 @@ if (loadedProjectItemList !== undefined) {
     projectItemList.appendProject(defaultProjectItem);
 }
 
-console.log(projectItemList);
-
 export default projectItemList;

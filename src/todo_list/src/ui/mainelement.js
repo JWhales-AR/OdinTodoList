@@ -41,12 +41,23 @@ function makeNewTaskItem(taskItem) {
 
     let checkbox = document.createElement("input");
     checkbox.classList.add("task-checkbox");
+    checkbox.innerHTML = "";
     checkbox.type = "checkbox";
+    if (taskItem.completed) {
+        checkbox.checked = true;
+    }
+    checkbox.addEventListener("change", () => {
+        taskItem.toggleCompletion();
+        projectItemList.storeList();
+    });
+
+    let labelSpan = document.createElement("span");
+    labelSpan.textContent = ` ${taskItem.getNameDuePriority()}`;
 
     let checkboxTaskWrapper = document.createElement("div");
     checkboxTaskWrapper.classList.add("task-checkbox-wrapper");
     checkboxTaskWrapper.appendChild(checkbox);
-    checkboxTaskWrapper.innerHTML += ` <span>${taskItem.getNameDuePriority()}</span>`;
+    checkboxTaskWrapper.appendChild(labelSpan);
 
     element.appendChild(checkboxTaskWrapper);
     element.appendChild(buttonsContainer);
@@ -64,6 +75,10 @@ function renderTaskItemsInSelectedProject() {
             makeNewTaskItem(taskItem);
         }
     }
+    // Array.from(document.getElementsByClassName("task-checkbox"))
+    //     .forEach(node => node.addEventListener("change", event => {
+    //         console.log(event.target);
+    //     }))
 }
 
 
