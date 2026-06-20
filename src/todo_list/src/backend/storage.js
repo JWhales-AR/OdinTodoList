@@ -40,6 +40,13 @@ export class ProjectItemList {
         this.storeList();
     }
 
+    removeProject(projectItemToRemove) {
+        this.#projectItems.splice(this.#projectItems.findIndex(projectItem =>
+            projectItem.getUUID() === projectItemToRemove.getUUID()
+        ), 1);
+        this.storeList();
+    }
+
     appendTaskToSelectedProject(taskItem) {
         taskItem.setProjectID(this.selectedProjectID);
         for (let projectItem of this.#projectItems) {

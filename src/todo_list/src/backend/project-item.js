@@ -23,7 +23,7 @@ export default class ProjectItem {
     }
 
     removeTaskItem(taskItemToRemove) {
-        this.#taskItems.splice(this.#taskItems.find(taskItem =>
+        this.#taskItems.splice(this.#taskItems.findIndex(taskItem =>
             taskItem.getUUID() === taskItemToRemove.getUUID()
         ), 1);
     }

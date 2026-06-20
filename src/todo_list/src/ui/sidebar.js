@@ -41,6 +41,7 @@ function makeNewProjectItem(projectItem) {
         deleteButton.classList.add("project-delete-button");
         deleteButton.innerHTML = deleteSvg;
         deleteButton.addEventListener("click", (event) => {
+            projectItemList.removeProject(projectItem);
             document.getElementById(element.id).remove();
             event.stopPropagation();
         });
