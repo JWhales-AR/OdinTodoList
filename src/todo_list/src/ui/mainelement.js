@@ -23,7 +23,7 @@ function makeNewTaskItem(taskItem) {
         document.getElementById(element.id).remove();
         projectItemList.removeTaskFromSelectedProject(taskItem);
         event.stopPropagation();
-    })
+    });
 
     let editButton = document.createElement("button");
     editButton.classList.add("task-edit-button");
@@ -32,7 +32,7 @@ function makeNewTaskItem(taskItem) {
         makeTaskUpdateDialog(taskItem, "edit", updateTaskItemDisplay)
             .showModal();
         event.stopPropagation();
-    })
+    });
 
     let buttonsContainer = document.createElement("div");
     buttonsContainer.classList.add("task-button-container");
@@ -56,6 +56,8 @@ function makeNewTaskItem(taskItem) {
 }
 
 function renderTaskItemsInSelectedProject() {
+    Array.from(document.getElementsByClassName("task-item"))
+        .forEach(node => node.remove());
     let selectedProject = projectItemList.getSelectedProject();
     if (selectedProject !== undefined) {
         for (let taskItem of selectedProject.getTaskItems()) {

@@ -8,6 +8,7 @@ import editSvg from '../assets/edit.svg';
 import makeProjectUpdateDialog from './project-update-dialog.js';
 import ProjectItem from '../backend/project-item.js';
 import projectItemList from '../backend/storage.js';
+import { renderTaskItemsInSelectedProject } from './mainelement.js';
 
 
 function resetProjectSelection(element, projectItem) {
@@ -58,9 +59,10 @@ function makeNewProjectItem(projectItem) {
         element.appendChild(buttonsContainer);
     }
 
-    element.addEventListener("click", () =>
-        resetProjectSelection(element, projectItem)
-    );
+    element.addEventListener("click", () => {
+        resetProjectSelection(element, projectItem);
+        renderTaskItemsInSelectedProject();
+    });
 
     projectsList.appendChild(element);
     if (projectItem.getUUID() === projectItemList.selectedProjectID) {
