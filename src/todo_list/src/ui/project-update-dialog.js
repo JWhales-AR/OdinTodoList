@@ -82,6 +82,8 @@ export default function makeProjectUpdateDialog(projectItem, actionName, refresh
                 }
                 if (actionName === "create") {
                     projectItemList.appendProject(projectItem);
+                } else {
+                    projectItemList.storeList();
                 }
 
                 dialog.remove();

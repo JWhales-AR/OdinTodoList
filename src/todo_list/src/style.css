@@ -224,6 +224,12 @@ main {
     justify-content: space-between;
 }
 
+.task-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
 .priority-radio-button,
 .task-checkbox {
     appearance: initial;
@@ -231,7 +237,6 @@ main {
     border: 0.15em solid currentColor;
     width: 1.15em;
     aspect-ratio: 1;
-    transform: translateY(-1px);
     display: inline-grid;
     place-content: center;
 }

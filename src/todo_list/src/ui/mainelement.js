@@ -52,7 +52,7 @@ function makeNewTaskItem(taskItem) {
     });
 
     let labelSpan = document.createElement("span");
-    labelSpan.textContent = ` ${taskItem.getNameDuePriority()}`;
+    labelSpan.textContent = taskItem.getNameDuePriority();
 
     let checkboxTaskWrapper = document.createElement("div");
     checkboxTaskWrapper.classList.add("task-checkbox-wrapper");

@@ -138,6 +138,8 @@ export default function makeTaskUpdateDialog(taskItem, actionName, refreshComman
                 }
                 if (actionName === "create") {
                     projectItemList.appendTaskToSelectedProject(taskItem);
+                } else {
+                    projectItemList.storeList();
                 }
 
                 dialog.remove();
