@@ -18,13 +18,14 @@ function resetProjectSelection(element, projectItem) {
         });
     element.classList.add("selected");
     projectItemList.setSelectedProjectID(projectItem);
-    document.getElementById("project-name").textContent = projectItem.name;
 }
 
 function updateProjectItemDisplay(projectItem) {
     const checkboxTaskText = document.getElementById(`${projectItem.getUUID()}`)
         .querySelector(".project-item span");
     checkboxTaskText.innerHTML =  `${folderSvg} ${projectItem.name}`;
+    document.getElementById("project-name").textContent = projectItemList
+        .getSelectedProject().name;
 }
 
 function makeNewProjectItem(projectItem) {

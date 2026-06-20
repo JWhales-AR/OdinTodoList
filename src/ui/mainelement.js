@@ -71,6 +71,7 @@ function renderTaskItemsInSelectedProject() {
         .forEach(node => node.remove());
     let selectedProject = projectItemList.getSelectedProject();
     if (selectedProject !== undefined) {
+        document.getElementById("project-name").textContent = selectedProject.name;
         for (let taskItem of selectedProject.getTaskItems()) {
             makeNewTaskItem(taskItem);
         }
@@ -81,7 +82,8 @@ function renderTaskItemsInSelectedProject() {
 let taskListHeader = function () {
     let element = document.createElement("h1");
     let spanProjectName = "<span id='project-name'>"
-        + "Default" + "</span>";
+        + projectItemList.getSelectedProject().name
+        + "</span>";
     let spanProjectSubDir =
         "<span id='project-sub-dir' class='accent-text'>"
             + "All" + "</span>";
