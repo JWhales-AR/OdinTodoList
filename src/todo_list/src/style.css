@@ -36,6 +36,7 @@ body {
 }
 
 nav.sidebar {
+    overflow: scroll;
     padding: 1.5em;
     min-width: 30ch;
     background-color: var(--color-bg-main);
@@ -68,37 +69,41 @@ nav.sidebar {
 }
 
 .task-item,
-.sidebar-view-container ul > li {
+.sidebar-list-item {
     padding: 0.8em 0.5em;
     border-radius: 4pt;
     cursor: pointer;
 }
 
-.sidebar-view-container ul > li > span {
-    paddint-right: 0.5em;
+.sidebar-list-item > span {
     display: flex;
     gap: 0.5em;
 }
 
-.sidebar-view-container ul > li:nth-child(2n) {
+.sidebar-list-item:nth-child(2n) {
     margin: 0.3em 0;
 }
 
 .task-item:hover,
-.sidebar-view-container ul > li:hover {
+.sidebar-list-item:hover {
     background-color: var(--color-bg-accent);
 }
 
-.sidebar-view-container ul > li.selected:not(:hover) > span {
+.sidebar-list-item.selected:not(:hover) > span {
     box-shadow: inset 0 -1px 0 0 var(--color-fg-accent);
 }
 
-#sidebar-projects-view-container ul > li {
+/* To fix specificity conflict with .sidebar-list-item:nth-child(2n) */
+.project-item:nth-child(n) {
     padding: 0.4em 0.5em;
     margin-left: 0.5em;
 }
 
-.sidebar-view-container li svg {
+.project-item.selected > span {
+    padding-right: 0.3em;
+}
+
+.sidebar-list-item svg {
     fill: var(--color-fg-accent);
     width: 1em;
 }

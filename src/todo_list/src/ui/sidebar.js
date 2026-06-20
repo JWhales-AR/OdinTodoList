@@ -33,6 +33,7 @@ function makeNewProjectItem(projectItem) {
     let element = document.createElement("li");
     element.id = projectItem.getUUID();
     element.classList.add("project-item");
+    element.classList.add("sidebar-list-item");
     element.innerHTML = `<span>${folderSvg} ${projectItem.name}</span>`;
 
     if (projectItem.modifiable) {
@@ -92,6 +93,7 @@ let tasksView = function () {
         function newGlobalOption(text, projectSubDir) {
             let element = document.createElement("li");
             element.classList.add("task-global-option");
+            element.classList.add("sidebar-list-item");
             element.innerHTML = `<span>${text}</span>`;
             element.addEventListener("click", () => {
                 document.getElementById("project-sub-dir").textContent = projectSubDir;
