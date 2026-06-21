@@ -9,12 +9,12 @@
     "Webdev"
   ],
   "license": "MIT",
-  "author": "Alex Rosegrid",
+  "author": "Jhonathan Whales",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "jest",
-    "serve": "webpack serve --open --config webpack.dev.js",
+    "dev": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
   "devDependencies": {
